@@ -1,0 +1,30 @@
+// 汉诺塔.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+
+using namespace std;
+
+void move(int n, char x, char y, char z)
+{
+	if (n == 1)
+	{
+		cout << x << "-->" << z << endl;
+	}
+	else
+	{
+		move(n - 1, x, z, y);
+		cout << x << "-->" << z << endl;
+		move(n - 1, y, x, z);
+	}
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	move(n, 'X', 'Y', 'Z');
+    return 0;
+}
+
