@@ -1,0 +1,77 @@
+
+#include "stdafx.h"
+
+#include <windows.h> 
+
+#include <math.h>
+
+
+#include <GL\glut.h>
+
+
+void MyDisplay(void)
+
+{
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glLoadIdentity();//该函数的功能是重置当前指定的矩阵为单位矩阵.
+
+
+
+					 //绘制点
+
+	glPointSize(5.0);//点的像素大小，默认值为1.0
+
+	glBegin(GL_POINTS);
+
+	glVertex2f(0.0f, 0.0f); 
+
+
+	glEnd();
+
+
+
+
+
+	glFlush();
+
+	glutSwapBuffers();//glutInitDisplayMode设置为GLUT_DOUBLE需要交换缓存
+
+}
+
+
+
+int main(int argc, _TCHAR* argv[])
+
+{
+
+	glutInit(&argc, (char**)argv);
+
+
+
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
+
+
+
+	glutInitWindowPosition(400, 400);
+
+
+
+	glutInitWindowSize(520, 520);
+
+
+
+	glutCreateWindow("Hello OpenGL");
+
+
+
+	glutDisplayFunc(MyDisplay);
+
+	glutMainLoop();//enters the GLUT event processing loop.  
+
+	getchar();
+
+	return 0;
+
+}
