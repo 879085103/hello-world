@@ -1,5 +1,9 @@
 // 汉诺塔.cpp: 定义控制台应用程序的入口点。
 //
+//先将n-1个盘子从x轴通过z轴移到y轴
+//将第n个盘子从x轴移到z轴
+//最后将n-1个盘子从y轴通过x轴移到z轴
+
 
 #include "stdafx.h"
 #include<iostream>
@@ -25,6 +29,6 @@ int main()
 	int n;
 	cin >> n;
 	move(n, 'X', 'Y', 'Z');
-    return 0;
+   	 return 0;
 }
 
