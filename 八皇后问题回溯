@@ -1,0 +1,95 @@
+// 八皇后回溯.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+
+using namespace std;
+
+int temp = 0;//统计总数
+int chess[8][8] = { 0 };//用二维数组表示棋盘
+
+int judge(int r, int c)//判断皇后在这个点是否安全
+{
+	int i, j;
+	//检查列
+	for ( i = 0; i < 8; i++)
+	{
+		if (chess[i][c] != 0)//该列已经有皇后
+		{
+			return 0;
+		}
+	}
+
+	//检查左上
+	for (i = r, j = c; i >= 0 && j >= 0; i--, j--)
+	{
+		if (chess[i][j] != 0)
+		{
+			return 0;
+		}
+	}
+
+	//检查右下
+	for (i = r, j = c; i < 8 && j < 8; i++, j++)
+	{
+		if (chess[i][j] != 0)
+		{
+			return 0;
+		}
+	}
+	
+	//检查右上
+	for (i = r, j = c; i < 8 && j >= 0; i++, j--)
+	{
+		if (chess[i][j] != 0)
+		{
+			return 0;
+		}
+	}
+
+	//检查左下
+	for (i = r, j = c; i >= 0 && j < 8; i--, j++)
+	{
+		if (chess[i][j] != 0)
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+
+void queen(int r)
+{
+	if (r == 8)
+	{
+		cout << "第 " << temp + 1 << " 种" << endl;
+		for (int i = 0; i < 8; i++)
+		{
+			for (int j = 0; j < 8; j++)
+			{
+				cout << chess[i][j] << " ";
+			}
+			cout << endl;
+		}
+		cout << endl;
+		temp++;
+	}
+	for (int i = 0; i < 8; i++)
+	{
+		
+		if (judge(r, i))
+		{
+			chess[r][i] = 1;
+			queen(r + 1);
+			chess[r][i] = 0;
+		}
+	}
+}
+int main()
+{
+	queen(0);
+	cout << temp << endl;
+    return 0;
+}
+
