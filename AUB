@@ -1,0 +1,54 @@
+// AUB.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<array>
+#include<algorithm>
+
+using namespace std;
+
+bool cmp(int a, int b)
+{
+	return a > b;
+}
+int main()
+{
+	int lenA, lenB;
+
+	cout << "请输入数组A，B的大小: " << endl;
+	cin >> lenA >> lenB;
+	int A[20];
+	int B[20];
+	cout << "请输入数组A: " ;
+	for (int i = 0; i < lenA; i++)
+	{
+		cin >> A[i];
+	}
+	cout << "请输入数组B: ";
+	for (int j = 0; j < lenB; j++)
+	{
+		cin >> B[j];
+	}
+	for(int i = 0; i < lenB; i++)
+		for (int j = 0; j < lenA; j++)
+		{
+			if (B[i] == A[j])
+			{
+				break;
+			}
+			if (j == lenA-1)
+			{
+				A[lenA++] = B[i];
+			}
+			
+		}
+	sort(A, A+lenA,less<int>());
+	for (int i = 0; i < lenA; i++)
+	{
+		cout << A[i] << " " << endl;
+	}
+
+    return 0;
+}
+
