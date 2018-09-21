@@ -1,0 +1,44 @@
+// 1017.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	int n, m;
+	int a, b;
+	int count = 0,temp = 0;
+	cin >> N;
+	cin.get();
+	cin.get();
+	for (int i = 0; i < N; i++)
+	{
+		temp = 1;//记录次数
+		while (cin >> n >> m && !(m == 0 && n ==0 ))
+		{
+			count = 0;
+			for (a = 1; a < n; a++)
+			{
+				b = a + 1;//因为b>a，所以令b = a+1
+				while (b > a && b < n)
+				{
+					if (double(a * a + b * b + m) / (a * b) == (a * a + b * b + m) / (a * b))
+					{
+						count++;
+					}
+					b++;
+				}
+			}
+			cout << "Case " << temp << ": " << count << endl;
+			temp++;
+		}
+		if (i < N - 1)
+			cout << endl;
+	}
+    return 0;
+}
+
