@@ -1,0 +1,29 @@
+// 1021.cpp: 定义控制台应用程序的入口点。
+//8个数为一个循环
+
+#include "stdafx.h"
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	int a[8];
+	/*a[0] = 1; a[1] = 2; a[2] = 0; a[3] = 2;
+	a[4] = 2; a[5] = 1; a[6] = 0; a[7] = 1;*/
+	while (cin >> n)
+	{
+		if ((n + 1) % 8 == 3 || (n + 1) % 8 == 7)
+		{
+			cout << "yes" << endl;
+		}
+		else
+		{
+			cout << "no" << endl;
+		}
+	}
+    return 0;
+}
+
