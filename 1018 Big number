@@ -1,0 +1,28 @@
+// 1018.cpp: 定义控制台应用程序的入口点。
+//一个正整数a的位数=(int)log10(a) + 1
+//log10(1 * 2 * 3 *...* n) = log10(1) + log10(2) + log10(3) +...+ log10(n) 
+
+#include "stdafx.h"
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+	int n;
+	int N;
+	cin >> n;
+	while (n--)
+	{
+		cin >> N;
+		double sum = 0.0;
+		for (int i = 1; i <= N; i++)
+		{
+			sum += log10(i);
+		}
+		cout << int(sum)+1 << endl;
+	}
+    return 0;
+}
+
