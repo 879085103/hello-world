@@ -1,0 +1,69 @@
+// 1039.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+bool judge(char c)//判断一个字母是否为元音
+{
+	if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+int main()
+{
+	string s;
+	int flag1 = 0;//判断是否有元音,0为无，1为有
+	int flag2 = 0;//判断是否有三个连续的元音或辅音,0为无，1为有;
+	int flag3 = 0;//判断是否有除了‘ee’和‘oo’之外两个相同字母，0为无，1为有
+	while (cin >> s && s != "end")
+	{
+		flag1 = 0;
+		flag2 = 0;
+		flag3 = 0;
+		for (int i = 0; i < s.size(); i++)
+		{
+			if (judge(s[i]) == true)
+			{
+				flag1 = 1;
+				break;
+			}
+		}
+
+		for (int i = 1; i < s.size()-1; i++)
+		{
+			if ((judge(s[i - 1]) == true && judge(s[i]) == true && judge(s[i + 1]) == true) || (judge(s[i - 1]) == false && judge(s[i]) == false && judge(s[i + 1]) == false))
+			{
+				flag2 = 1;
+				break;
+			}
+		}
+
+		for (int i = 0; i < s.size(); i++)
+		{
+			if (s[i] == s[i + 1] && s[i] != 'e' && s[i] != 'o')
+			{
+				flag3 = 1;
+				break;
+			}
+		}
+		if (flag1 == 1 && flag2 == 0 && flag3 == 0)
+		{
+			cout << "<" << s << "> is acceptable." << endl;
+		}
+		else
+		{
+			cout << "<" << s << "> is not acceptable." << endl;
+		}
+	}
+    return 0;
+}
+
