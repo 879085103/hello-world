@@ -1,0 +1,42 @@
+// 1042.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+using namespace std;
+
+int a[50000];
+
+int main()
+{
+	int n;
+	
+	while (cin >> n)
+	{
+		int count = 1;//位数
+		memset(a, 0, sizeof(a));
+		a[0] = 1;
+		for (int i = 1; i <= n; i++)
+		{
+			for (int j = 0; j < count; j++)
+				a[j] = a[j] * i;
+			for (int j = 0; j < count; j++)
+			{
+				if (a[j] > 9)//进位操作
+				{
+					a[j + 1] += a[j] / 10;
+					a[j] = a[j] % 10;
+					if (j == count - 1)//若最高位进位，位数加1
+						count++;
+				}
+			}
+		}
+		for (int i = count - 1; i >= 0; i--)
+		{
+			cout << a[i] ;
+		}
+		cout << endl;
+	}
+    return 0;
+}
+
