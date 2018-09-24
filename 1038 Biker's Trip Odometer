@@ -1,0 +1,29 @@
+// 1040.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+const double p = 3.1415927;
+
+using namespace std;
+
+int main()
+{
+	double diameter;
+	int rads;
+	double t;
+	double disaster = 0;//总距离
+	double  mph = 0;
+	int count = 1;//计数
+	while (cin >> diameter >> rads >> t && rads != 0)
+	{		
+		diameter = diameter / 12 / 5280;//将英寸转化为英里
+		disaster = p * diameter * rads;
+		t = t / 3600;//将秒化为小时
+		mph = disaster / t;
+		printf("Trip #%d: %.2lf %.2lf\n", count, disaster, mph);
+		count++;
+	}
+    return 0;
+}
+
