@@ -1,0 +1,50 @@
+#include<stdio.h> 
+#include<math.h>
+
+char run[10];
+int main()
+{
+	int n;//节的数量
+	double d;//总距离
+	int t;//团队编号
+	int judge;//判断成绩是否有效 
+	int hour_, min_, second_;
+	double ans;
+	int time; //总时间 
+	scanf("%d %lf",&n,&d);
+	while (scanf("  %d", &t) != EOF)
+	{
+		hour_ = 0;
+		min_ = 0;
+		second_ = 0;
+		ans = 0;
+		time = 0;
+		judge = 1;
+		for (int i = 0; i < n; i++)
+		{
+			scanf("%s", run);
+			if(run[0] == '-')
+				judge = 0;
+			if(judge == 1)
+			{
+				hour_ += run[0] - '0';
+				min_ += (run[2] - '0') * 10 + run[3] - '0';
+				second_ += (run[5] - '0') * 10 + run[6] - '0';
+			}
+		}
+		if(judge == 1)
+		{
+			time = 3600 * hour_ + 60 * min_ + second_;
+			ans = floor(time / d + 0.5);//四舍五入 
+			printf("%3d: %d:%02d min/km\n",t, (int)(ans) / 60, (int)(ans) % 60);
+ 
+		}
+		else
+		{
+			printf("%3d: -\n",t);
+		}
+	}
+		
+		
+    return 0;
+}
