@@ -1,0 +1,13 @@
+Status DeleteK(SqList *a, int i, int k)
+{
+  int j;
+  if(i < 1 || i > (*a).length || k < 0 || i + k - 1 > (*a).length)
+    return ERROR;
+  for(j = i + k; j  <= (*a).length; j++)
+  {
+    (*a).elem[j - k - 1] = (*a).elem[j - 1];
+  }
+  (*a).length -= k;
+  
+  return OK;
+}
