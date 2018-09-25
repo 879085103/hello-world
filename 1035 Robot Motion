@@ -1,0 +1,70 @@
+// 1035.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+char map[10][10];//储存地图
+int visit[10][10];//标记被访问的点
+int cnt = 0;//记录走的步数
+int rows, cols, start;//行数，列数，出发列
+int flag = 0;//标记是否能出网格，0能出，1不能出
+int ai, aj;//记录 第一个重复的 位置
+
+int main()
+{
+	while (cin >> rows >> cols >> start && !(rows == 0 && cols == 0))
+	{
+		int  i, j;
+		cnt = 0;
+		flag = 0;
+		memset(map, '0', sizeof(map));
+		memset(visit, -1, sizeof(visit));//初始化 
+		//初始化为-1为了防止一步没走时误处理
+		for( i = 0; i < rows; i++)
+			for ( j = 0; j < cols; j++)
+			{
+				cin >> map[i][j];
+			}//读取网格
+		i = 0;
+		j = start - 1;//标记入口点
+		while (i >= 0 && i < rows && j  >= 0 && j < cols)
+		{
+			if(visit[i][j] ==  -1)
+			{
+				visit[i][j] = cnt;//储存每个点是第几步被访问
+			}
+			else
+			{
+				ai = i;
+				aj = j;
+				flag = 1;
+				break;//如果再次访问，就代表进入循环，退出
+			}
+			
+			if (map[i][j] == 'N')
+				i--;
+			else if (map[i][j] == 'S')
+				i++;
+			else if (map[i][j] == 'W')
+				j--;
+			else if (map[i][j] == 'E')
+				j++;
+
+			cnt++;//步数+1
+		}
+		if (flag == 1)
+		{
+			cout << visit[ai][aj] << " step(s)  before a  loop  of " << cnt - visit[i][j] << " step(s)"<<endl;
+		}
+		else if (flag == 0)
+		{
+			cout << cnt << " step(s) to exit" << endl;
+		}
+	}
+    return 0;
+}
+
