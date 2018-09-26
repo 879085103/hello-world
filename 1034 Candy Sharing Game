@@ -1,0 +1,74 @@
+// 1034.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+
+using namespace std;
+
+int flag = 0;//判断每个人的糖果是否相等，0相等，1不相等
+bool judge(int a[], int n)
+{
+	flag = 0;
+	for (int i = 0; i < n -  1; i++)
+	{
+		if (a[i] != a[i + 1])//有人的糖果不相等
+		{
+			flag = 1;
+			break;
+		}
+	}
+	if (flag == 1)
+	{
+		return false;
+	}
+	else
+		return true;
+}
+
+int main()
+{
+	int N;
+	int a[1000];//储存每个学生拥有的糖果数
+	int b[1000];//作为a的副本
+	int count;//记录老师吹口哨的次数
+
+	while (cin >> N && N != 0)
+	{
+		flag = 0;
+		count = 0;
+		memset(a, 0, sizeof(a));
+		memset(b, 0, sizeof(b));
+		for (int i = 0; i < N; i++)
+		{
+			cin >> a[i];
+			b[i] = a[i];
+
+		}
+		while (judge(a, N) != true)
+		{
+			
+			for (int i = N- 1; i > 0; i--)
+			{
+				a[i] = a[i] / 2;
+				a[i] += b[i - 1] / 2;
+			}
+			a[0] = a[0] / 2;
+			a[0] = a[0] + b[N - 1] / 2;//a[0]单独处理
+
+			for (int j = 0; j < N; j++)
+			{
+				if (a[j] % 2 == 1)
+				{
+					a[j]++;
+				}
+				b[j] = a[j];//b数组更新
+			}//如果是奇数，糖果+1
+
+			count++;
+		}
+		cout << count << " " << a[0] << endl;
+	}
+    return 0;
+}
+
