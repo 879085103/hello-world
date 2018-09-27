@@ -1,0 +1,64 @@
+// 1016.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+int circle[25];
+int visit[25];//记录数是否已经被使用
+int cnt;
+int  sum = 1;//计数
+
+bool judge(int n)
+{
+	if (n == 0 || n == 1)
+		return false;
+	for (int i = 2; i * i <= n; i++)
+	{
+		if (n % i == 0)
+			return false;
+	}
+	return true;
+}
+
+void dfs(int x)
+{
+	if (cnt  == x && judge(circle[cnt - 1] + 1) == true)//素环成功
+	{
+		for (int i = 0; i < cnt - 1; i++)
+		{
+			cout << circle[i] << " ";
+		}
+		cout << circle[cnt - 1] << endl;
+	}
+
+	for (int i = 2; i <= cnt; i++)
+	{
+		
+		if (judge(i + circle[x - 1]) == true && visit[i] == 0)//两环之间和是素数且该数未被使用
+		{
+			visit[i] = 1;//标记该数已被使用
+			circle[x] = i;//将该数放入环中
+			dfs(x + 1);
+			visit[i] = 0;
+		}
+	}
+}
+
+int main()
+{
+	while (cin >> cnt)
+	{
+		memset(circle, 0, sizeof(circle));
+		memset(visit, 0, sizeof(visit));
+		circle[0] = 1;
+		cout << "Case " << sum++ << ":"<<endl;
+		dfs(1);
+		cout << endl;
+	}
+    return 0;
+}
+
