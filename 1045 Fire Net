@@ -86,3 +86,99 @@ int main()
     return 0;
 }
 
+
+// ConsoleApplication3.cpp: 定义控制台应用程序的入口点。
+//
+
+// 1045.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+
+using namespace std;
+int n;
+char map[5][5];//储存地图
+int visit[5][5];//储存炮台的位置
+int cnt = 0;//记录炮台数
+
+bool judge(int x, int y)
+{
+	for (int j = y + 1; j < n; j++)//检查该点所在列下侧
+	{
+		if (map[x][j] == 'X')//遇到了墙 退出 循环
+		{
+			break;
+		}
+		else if (visit[x][j] == 1)
+			return false;
+	}
+	for (int j = y - 1; j >= 0; j--)//检查该点所在列上侧
+	{
+		if (map[x][j] == 'X')
+		{
+			break;
+		}
+		else if (visit[x][j] == 1)
+			return false;
+	}
+	for (int j = x - 1; j >= 0; j--)
+	{
+		if (map[j][y] == 'X')//检查该点所在行左侧
+		{
+			break;
+		}
+		else if (visit[j][y] == 1)
+			return false;
+	}
+	for (int j = x + 1; j < n; j++)
+	{
+		if (map[j][y] == 'X')//检查该点所在行左侧
+		{
+			break;
+		}
+		else if (visit[j][y] == 1)
+			return false;
+	}
+	return true;
+}
+
+void dfs(int r)
+{
+	if (r > cnt)
+		cnt = r;//更新最大值
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < n; j++)
+		{
+			if (map[i][j] == '.')
+			{
+				if (judge(i, j) == true && visit[i][j] != 1)
+				{
+					visit[i][j] = 1;
+					dfs(r + 1);
+					visit[i][j] = 0;
+				}
+			}
+		}
+
+}
+int main()
+{
+	while (cin >> n && n != 0)
+	{
+		cnt = 0;
+		memset(map, '0', sizeof(map));
+		memset(visit, 0, sizeof(visit));
+		for (int i = 0; i < n; i++)
+			for (int j = 0; j < n; j++)
+			{
+				cin >> map[i][j];
+			}
+		dfs(0);
+		cout << cnt << endl;
+	}
+	return 0;
+}
+
+
+
