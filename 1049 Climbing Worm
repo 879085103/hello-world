@@ -1,0 +1,33 @@
+// 1049.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+
+using namespace std;
+
+int main()
+{
+	int n,u,d;
+	int t = 0;
+	while (cin >> n >> u >> d && !(n == 0 && u == 0 && d == 0))
+	{
+		t = 0;
+		int dis = 0;
+		while (dis < n)
+		{
+			if (t % 2 == 0)//偶数秒的时间蠕虫向上爬u英寸
+			{
+				dis = dis + u;
+			}
+			else if (t % 2 == 1)//奇数秒的时间蠕虫向下掉d英寸
+			{
+				dis = dis - d;
+			}
+			t++;
+		}
+		cout << t << endl;
+	}
+    return 0;
+}
+
