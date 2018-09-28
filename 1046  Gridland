@@ -1,0 +1,35 @@
+// 1046.cpp: 定义控制台应用程序的入口点。
+//设有一个m *  n的点阵
+//如果m,n不全为奇数，则最短回到起点的距离为m * n
+//如果m，n全 为奇数，则最短回到起点的距离为m * n + 根号2
+
+#include "stdafx.h"
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+	int N;
+	int cnt = 1;
+	cin >> N;
+	while (N--)
+	{
+		int m, n;
+		cin >> m >> n;
+		cout << "Scenario #" << cnt << ":" << endl;
+		if (!(m % 2 == 1 && n % 2 == 1))
+		{
+			printf("%d.00\n", m * n);
+		}
+		else
+		{
+			printf("%d.41\n", m * n);
+		}
+		cout << endl;
+		cnt++;
+	}
+    return 0;
+}
+
