@@ -1,0 +1,94 @@
+// 1051.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<algorithm>
+
+using namespace std;
+int  t = 0;//最小设置时间
+int a[5000][2];
+int visit[5000];
+
+int judge(int visit[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (visit[i] == 0)
+		{
+			return  0;
+		}
+	}
+	return 1;
+}//判断如果visit数组都为1，说明都组合完了
+
+int main()
+{
+	int T,n;
+	cin >> T;
+	while (T--)
+	{
+		t = 0;
+		memset(a, 0, sizeof(a));
+		memset(visit, 0, sizeof(visit));
+		cin >> n;
+		for (int i = 0; i < 2 * n; i++)
+		{
+			if (i % 2 == 0)
+			{
+				cin >> a[i / 2][0];
+			}
+			else
+			{
+				cin >> a[i / 2][1];
+			}
+		}
+		for (int i = 0; i < n - 1; i++)
+			for (int j = 0; j < n - i - 1; j++)
+			{
+				int temp;
+				if (a[j][0] > a[j + 1][0])
+				{
+					temp = a[j][0];
+					a[j][0] = a[j + 1][0];
+					a[j + 1][0] = temp;
+
+					temp = a[j][1];
+					a[j][1] = a[j + 1][1];
+					a[j + 1][1] = temp;
+				}
+			}//对所用木棍按其长度从小到大进行排序
+		int k = 0;
+	
+			while (judge(visit, n) == 0)
+			{
+				visit[k] = 1;
+				for (int i = k + 1; i < n; i++)
+				{
+					if (visit[i] != 1)
+					{
+						if (a[k][0] <= a[i][0] && a[k][1] <= a[i][1])
+						{
+							visit[i] = 1;
+							k = i;
+
+						}
+					}
+				}
+				for (int j = 0; j < n; j++)
+				{
+
+					if (visit[j] == 0)
+					{
+						k = j;
+						break;
+					}
+				}
+				t++;
+			}
+			cout << t << endl;
+		}
+	
+    return 0;
+}
+
