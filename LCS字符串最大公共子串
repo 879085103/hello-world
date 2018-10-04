@@ -24,17 +24,17 @@ void Lcs(string x, string y)
 			if (x[i - 1] == y[j - 1])
 			{
 				a[i][j] = a[i - 1][j - 1] + 1;
-			}
+			}//由左上角得到
 			else
 			{
 				if (a[i - 1][j] >= a[i][j - 1])
 				{
 					a[i][j] = a[i - 1][j];
-				}
+				}//由左边得到
 				else
 				{
 					a[i][j] = a[i][j - 1];
-				}
+				}//由右边得到
 			}
 		}
 }
