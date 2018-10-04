@@ -1,0 +1,43 @@
+// 字符全排列.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+string str;
+
+void swap(int &a, int &b)
+{
+	int t = a;
+	a = b;
+	b = t;
+}
+
+void Permutation(int from, int to)
+{
+	if (from == to)
+	{
+		for (int i = 0; i <= to; i++)
+		{
+			cout << str[i];
+		}
+		cout << endl;
+		return;
+	}
+	for (int i = from; i <= to; i++)
+	{
+		swap(str[from], str[i]);
+		Permutation(from + 1, to);
+		swap(str[i], str[from]);//结束后恢复最原始的状态
+	}
+}
+int main()
+{
+	cin >> str;
+	Permutation(0, str.size() - 1);
+    return 0;
+}
+
