@@ -1,0 +1,40 @@
+// 循环左移字符串.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+void ReverseString(string &s, int from, int to)//转置字符串
+{
+	while (from < to)
+	{
+		char t = s[from];
+		s[from++] = s[to];
+		s[to--] = t;
+	}
+}
+
+void LeftMoveString(string &s, int n, int m)//n:字符串长度 m:左移位数
+{
+	m %= n;//假如m>n,左移m位和左移m - n位是一样的
+	ReverseString(s, 0, m - 1);//将要左移的部分转置
+	ReverseString(s, m, n - 1);//将剩余的部分转置
+	ReverseString(s, 0, n - 1);//将新的字符串整体转置
+}
+int main()
+{
+	int m;
+	string s;
+	getline(cin, s);
+	cin >> m;
+	LeftMoveString(s, s.size(), m);
+	for (int i = 0; i < s.size(); i++)
+	{
+		cout << s[i];
+	}
+    return 0;
+}
+
