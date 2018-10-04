@@ -1,0 +1,87 @@
+// 零子数组.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#include<algorithm>
+#include<cmath>
+#define MaxSize 50
+
+using namespace std;
+
+int a[MaxSize];
+int temp[MaxSize];//工具数组
+int sum[MaxSize];//储存前i项的和
+
+
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		int start = 0;
+	    int end = n;
+		int min = 10000;
+		memset(a, 0, sizeof(a));
+		memset(sum, 0, sizeof(sum));
+		sum[0] = -100;//便于排序
+		cout << "请输入"<<n<<"个数: ";
+		cin >> a[1];
+		sum[1] = a[1];
+		temp[1] = sum[1];
+		for (int i = 2; i <= n; i++)
+		{
+			cin >> a[i];
+			sum[i] = sum[i - 1] + a[i];
+			temp[i] = sum[i];
+			if (abs(sum[i]) < abs(min))
+			{
+				min = sum[i];
+				end = i;
+			}
+		}
+		//for (int j = 1; j <= n; j++)
+		//{
+		//	cout << sum[j] << " ";
+		//}
+		//cout << endl;
+		sort(sum, sum + n + 1, less<int>());
+		for (int j = 1; j <= n; j++)
+		{
+			if (abs(sum[j + 1] - sum[j]) < abs(min))
+			{
+				min = sum[j + 1] - sum[j];
+				for (int k = 1; k <= n; k++)
+				{
+					if (sum[j] == temp[k])
+					{
+						start = k;
+						break;
+					}
+					
+				}
+				for (int k = start + 2; k <= n; k++)//结束下标一定比开始下标大，所以从开始下标后一位遍历
+				{
+					if (sum[j + 1] == temp[k])
+					{
+						end = k;
+						break;
+					}
+				}//找出子数组开始与结束的下标
+			}//两两相减取差值最小，即为从i到j的子数组的最接近0的一组
+		}
+		//for (int j = 1; j <= n; j++)
+		//{
+		//	cout << sum[j] << " ";
+		//}
+		//cout << endl;
+		cout << min <<" "<<start+1<<" "<<end<< endl;
+		for (int i = start + 1; i<= end; i++)
+		{
+			cout << a[i] << " ";
+		}
+		cout << endl;
+	}
+    return 0;
+}
+
